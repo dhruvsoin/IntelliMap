@@ -140,7 +140,14 @@ ethorx/
 
 ---
 
-## 🛡️ License
 
-Private and Confidential. Internal Use Only.
+## 🛡️ License & Copyright
+
+**Copyright © 2025 Ethorx. All Rights Reserved.**
+
+This software is proprietary and confidential. Unauthorized copying, distribution, modification, or use of this software, via any medium, is strictly prohibited without explicit written permission from Ethorx.
+
+See the [LICENSE](LICENSE) file for full terms and conditions.
+
+**⚠️ NOTICE**: This software contains trade secrets and proprietary algorithms. Any unauthorized use may result in legal action.
 
