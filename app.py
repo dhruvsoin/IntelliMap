@@ -263,7 +263,7 @@ def main():
             
             # Detect contamination issues
             contamination_info = mapper._detect_value_contamination(st.session_state.raw_df) 
-            uniqueness_scores = mapper._calculate_uniqueness_scores(st.session_state.raw_df)
+
             
             # Show contamination warning if detected
             if contamination_info:

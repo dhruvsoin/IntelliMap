@@ -20,34 +20,7 @@ class DataTransformer:
         
         return df_clean
     
-    @staticmethod
-    def transform_column(series: pd.Series, target_pattern: str) -> pd.Series:
-        """Transform column based on target pattern"""
-        if target_pattern == "date":
-            try:
-                return pd.to_datetime(series, errors='coerce')
-            except:
-                return series
-        
-        elif target_pattern == "numeric":
-            # Remove currency symbols and commas
-            if series.dtype == 'object':
-                cleaned = series.astype(str).str.replace(r'[$,]', '', regex=True)
-                return pd.to_numeric(cleaned, errors='coerce')
-            return pd.to_numeric(series, errors='coerce')
-        
-        elif target_pattern == "currency":
-            # Ensure currency format
-            numeric = pd.to_numeric(series.astype(str).str.replace(r'[$,]', '', regex=True), 
-                                   errors='coerce')
-            return numeric.apply(lambda x: f"${x:,.2f}" if pd.notna(x) else np.nan)
-        
-        elif target_pattern == "phone":
-            # Standardize phone format
-            return series.astype(str).str.replace(r'[^\d+]', '', regex=True)
-        
-        else:
-            return series
+
     
     @staticmethod
     def apply_mappings(raw_df: pd.DataFrame, 

@@ -74,8 +74,15 @@ class SmartMapper:
     
     def normalize_header(self, header: str) -> str:
         """Normalize header names for better matching"""
-        # Remove special characters and convert to lowercase
-        normalized = re.sub(r'[^a-zA-Z0-9\s]', '', str(header).lower())
+        # Convert to lowercase first
+        normalized = str(header).lower()
+        
+        # Convert underscores, hyphens, and dots to spaces (common separators in column names)
+        normalized = normalized.replace('_', ' ').replace('-', ' ').replace('.', ' ')
+        
+        # Remove other special characters
+        normalized = re.sub(r'[^a-zA-Z0-9\s]', '', normalized)
+        
         # Remove extra spaces
         normalized = ' '.join(normalized.split())
         
@@ -202,14 +209,34 @@ class SmartMapper:
     
     def _check_synonym_match(self, term1: str, term2: str) -> float:
         """Check if two terms are synonyms and return confidence score"""
+        # Split terms into words for partial matching
+        term1_words = set(term1.split())
+        term2_words = set(term2.split())
+        
         # Check if both terms appear in the same synonym group
         for category, synonyms in self.FIELD_SYNONYMS.items():
             # Check for exact matches in the synonym list
-            term1_match = any(term1 == syn for syn in synonyms)
-            term2_match = any(term2 == syn for syn in synonyms)
+            term1_exact_match = any(term1 == syn for syn in synonyms)
+            term2_exact_match = any(term2 == syn for syn in synonyms)
             
-            if term1_match and term2_match:
-                return 95.0  # High confidence for synonym matches
+            # If both are exact matches, highest confidence
+            if term1_exact_match and term2_exact_match:
+                return 95.0
+            
+            # Check if any word from term1 or term2 matches a synonym
+            term1_word_match = any(word in synonyms for word in term1_words)
+            term2_word_match = any(word in synonyms for word in term2_words)
+            
+            # If both contain words from the same synonym group, good match
+            # Example: "customer_email" and "email" both contain "email" from email synonyms
+            if term1_word_match and term2_word_match:
+                # Check if they share the key synonym word
+                term1_syn_words = {word for word in term1_words if word in synonyms}
+                term2_syn_words = {word for word in term2_words if word in synonyms}
+                
+                if term1_syn_words & term2_syn_words:  # If they share synonym words
+                    return 90.0  # High confidence for partial synonym matches
+        
         return 0.0
     
     def detect_data_patterns(self, series: pd.Series) -> str:
@@ -344,22 +371,4 @@ class SmartMapper:
         
         return contamination
         
-    def _calculate_uniqueness_scores(self, df: pd.DataFrame) -> Dict[str, float]:
-        """
-        Calculate uniqueness scores for each column (percentage of unique values).
-        
-        Args:
-            df: Input DataFrame
-            
-        Returns:
-            Dictionary mapping column names to their uniqueness score (0-1)
-        """
-        scores = {}
-        for col in df.columns:
-            unique_count = df[col].nunique()
-            total_count = len(df[col].dropna())
-            if total_count > 0:
-                scores[col] = unique_count / total_count
-            else:
-                scores[col] = 0.0
-        return scores
+
