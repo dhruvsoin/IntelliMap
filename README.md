@@ -1,8 +1,8 @@
-# 🗺️ Ethorx - Smart Data Mapper
+# 🗺️ IntelliMap - Smart Data Mapper
 
 **Transform messy, inconsistent data into perfect templates — automatically.**
 
-Ethorx is a privacy-first, industrial-grade data mapping tool that uses advanced algorithms (including the Hungarian Algorithm) to intelligently map your raw data columns to a standard template, ensuring 100% data integrity without sending a single byte of data to the cloud.
+IntelliMap is a privacy-first, industrial-grade data mapping tool that uses advanced algorithms (including the Hungarian Algorithm) to intelligently map your raw data columns to a standard template, ensuring 100% data integrity without sending a single byte of data to the cloud.
 
 ---
 
@@ -54,7 +54,7 @@ Ethorx is a privacy-first, industrial-grade data mapping tool that uses advanced
 ## ⚙️ Technical Details
 
 ### The Matching Algorithm
-Ethorx uses a multi-stage scoring system to determine the best match:
+IntelliMap uses a multi-stage scoring system to determine the best match:
 
 1.  **Normalization**: Column names are normalized by:
     - Converting to lowercase
@@ -76,7 +76,7 @@ Ethorx uses a multi-stage scoring system to determine the best match:
 
 ### Directory Structure
 ```
-ethorx/
+IntelliMap/
 ├── app.py                      # Main Streamlit application
 ├── requirements.txt            # Python dependencies
 ├── utils/
@@ -92,5 +92,5 @@ ethorx/
 
 ## 🛡️ License & Copyright
 
-**Copyright © 2025 Ethorx. All Rights Reserved.**
+**Copyright © 2025 IntelliMap. All Rights Reserved.**
 See the [LICENSE](LICENSE) file for full terms and conditions.
