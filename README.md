@@ -31,56 +31,6 @@ Ethorx is a privacy-first, industrial-grade data mapping tool that uses advanced
 
 ---
 
-## 🛠️ Installation
-
-### Prerequisites
-- Python 3.8 or higher
-- `pip` or `uv` package manager
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/your-repo/ethorx.git
-cd ethorx
-```
-
-### 2. Create a virtual environment (recommended)
-```bash
-python -m venv .venv
-.venv\Scripts\activate  # On Windows
-# or
-source .venv/bin/activate  # On macOS/Linux
-```
-
-### 3. Install Dependencies
-Using standard pip:
-```bash
-pip install -r requirements.txt
-```
-
-OR using `uv` (faster):
-```bash
-uv pip install -r requirements.txt
-```
-
----
-
-## 🏃‍♂️ How to Run
-
-Start the application with:
-
-```bash
-streamlit run app.py
-```
-
-OR with `uv`:
-```bash
-uv run python -m streamlit run app.py
-```
-
-The app will open automatically in your browser at `http://localhost:8501`.
-
----
-
 ## 📖 User Guide
 
 1.  **Upload Raw Data**: Upload your messy file (CSV/Excel/JSON) that contains the data you HAVE.
@@ -140,14 +90,7 @@ ethorx/
 
 ---
 
-
 ## 🛡️ License & Copyright
 
 **Copyright © 2025 Ethorx. All Rights Reserved.**
-
-This software is proprietary and confidential. Unauthorized copying, distribution, modification, or use of this software, via any medium, is strictly prohibited without explicit written permission from Ethorx.
-
 See the [LICENSE](LICENSE) file for full terms and conditions.
-
-**⚠️ NOTICE**: This software contains trade secrets and proprietary algorithms. Any unauthorized use may result in legal action.
-
